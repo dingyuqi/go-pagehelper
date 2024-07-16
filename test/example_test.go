@@ -8,6 +8,7 @@ package test
 import (
 	"fmt"
 	"github.com/dingyuqi/go-pagehelper"
+	"github.com/dingyuqi/go-pagehelper/respond"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 	"log"
@@ -42,7 +43,7 @@ func exampleFunc(ctx *gin.Context) {
 	tx := DB.Model(&UserData{})
 	query := tx.Select("*")
 	pageParam.GetResult(query, &data)
-	OkWithData(pageParam.ToResult(data), ctx)
+	respond.OkWithData(pageParam.ToResult(data), ctx)
 }
 
 // the database table that we want to fetch

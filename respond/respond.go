@@ -1,9 +1,9 @@
-// Package test -----------------------------
+// Package respond -----------------------------
 // @file      : respond.go
 // @author    : dingyq
 // @time      : 2024/7/16 下午5:23
 // -------------------------------------------
-package test
+package respond
 
 import (
 	"github.com/gin-gonic/gin"
@@ -14,8 +14,10 @@ const (
 	SUCCESS = 200
 )
 
-func OkWithData(data interface{}, c *gin.Context) {
-	result(SUCCESS, data, "OperationSuccess", c)
+type response struct {
+	Code int         `json:"code"`
+	Data interface{} `json:"data"`
+	Msg  string      `json:"msg"`
 }
 
 func result(code int, data interface{}, msg string, c *gin.Context) {
@@ -27,8 +29,6 @@ func result(code int, data interface{}, msg string, c *gin.Context) {
 	})
 }
 
-type response struct {
-	Code int         `json:"code"`
-	Data interface{} `json:"data"`
-	Msg  string      `json:"msg"`
+func OkWithData(data interface{}, c *gin.Context) {
+	result(SUCCESS, data, "OperationSuccess", c)
 }
